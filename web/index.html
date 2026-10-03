@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Beytelligence</title>
+<meta name="description" content="Beytelligence: study any Beyblade X opponent and get the counter that beats it, from every official model or from your own arsenal.">
+<meta name="theme-color" content="#070a0f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Beytelligence">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="head">
+<div class="classbar" aria-hidden="true"><span>Top secret</span><span class="mid">Beytelligence // field intelligence system</span><span>Blader eyes only</span></div>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo" aria-hidden="true"><b>B</b></span>
+    <div>
+      <h1>Beytelligence</h1>
+      <p class="tagline" id="tagline"><span class="dot"></span>establishing uplink…</p>
+    </div>
+  </div>
+  <nav class="tabs" id="tabs">
+    <button class="tab active" data-tab="finder"><span class="k">01</span>Target analysis</button>
+    <button class="tab" data-tab="collection"><span class="k">02</span>My arsenal <span class="pill" id="colCount">0</span></button>
+    <button class="tab" data-tab="browse"><span class="k">03</span>Dossiers</button>
+  </nav>
+</header>
+</div>
+
+<main>
+  <!-- ------------------------------------------------ Target analysis -->
+  <section id="tab-finder" class="tab-panel active">
+    <div class="finder">
+      <div class="opponent-col">
+        <h2><span class="step">01</span> Identify the target</h2>
+        <div class="search">
+          <input id="oppSearch" type="search" placeholder="Target name… e.g. Dran Buster, Soar Phoenix, Wizard Rod" autocomplete="off" spellcheck="false">
+          <div id="oppDrop" class="dropdown hidden"></div>
+        </div>
+        <div id="oppCard" class="opp-card empty">
+          <p><b>Awaiting target.</b> Search for the Beyblade you are facing, or open its file under <b>Dossiers</b>.</p>
+        </div>
+      </div>
+
+      <div class="results-col">
+        <h2><span class="step">02</span> Recommended assets</h2>
+        <div class="controls">
+          <div class="seg" id="poolSeg">
+            <button data-pool="all" class="active">All known models</button>
+            <button data-pool="mine">My arsenal</button>
+          </div>
+          <select id="lineFilter" title="Product line">
+            <option value="">All lines</option>
+            <option value="BX">BX (Basic Line)</option>
+            <option value="UX">UX (Unique Line)</option>
+            <option value="CX">CX (Custom Line)</option>
+            <option value="Hasbro">Hasbro</option>
+          </select>
+          <select id="typeFilter" title="Type">
+            <option value="">All types</option>
+            <option>Attack</option><option>Defense</option><option>Stamina</option><option>Balance</option>
+          </select>
+          <select id="topN" title="How many">
+            <option value="5">Top 5</option>
+            <option value="8" selected>Top 8</option>
+            <option value="15">Top 15</option>
+            <option value="40">Top 40</option>
+          </select>
+        </div>
+        <div id="results" class="cards"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------ My arsenal -->
+  <section id="tab-collection" class="tab-panel">
+    <div class="collection-head">
+      <div>
+        <h2><span class="step">02</span> My arsenal</h2>
+        <p class="muted">Log the Beyblades you own. Target analysis can then pick the best asset <i>you actually have</i> for any target. Stored on this device; use Export to back it up.</p>
+      </div>
+      <div class="search">
+        <input id="colSearch" type="search" placeholder="Log an asset… e.g. Knight Shield" autocomplete="off" spellcheck="false">
+        <div id="colDrop" class="dropdown hidden"></div>
+      </div>
+    </div>
+    <div id="colCards" class="cards"></div>
+
+    <details class="builder" id="builder">
+      <summary>Assemble a custom combo (your own Blade + Ratchet + Bit)</summary>
+      <div class="builder-grid">
+        <label>Blade <select id="cbBlade"></select></label>
+        <label id="cbLockWrap" class="hidden">Lock Chip <select id="cbLock"></select></label>
+        <label id="cbAssistWrap" class="hidden">Assist Blade <select id="cbAssist"></select></label>
+        <label id="cbAssist2Wrap" class="hidden">2nd Assist Blade <select id="cbAssist2"></select></label>
+        <label>Ratchet <select id="cbRatchet"></select></label>
+        <label>Bit <select id="cbBit"></select></label>
+      </div>
+      <div id="cbPreview" class="cb-preview"></div>
+      <button id="cbAdd" class="btn primary">Add to arsenal</button>
+    </details>
+
+    <div class="col-actions">
+      <button id="exportBtn" class="btn">Export JSON</button>
+      <label class="btn">Import JSON <input id="importFile" type="file" accept="application/json" hidden></label>
+      <button id="clearBtn" class="btn danger">Wipe arsenal</button>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------ Dossiers -->
+  <section id="tab-browse" class="tab-panel">
+    <h2><span class="step">03</span> Dossiers</h2>
+    <div class="controls">
+      <input id="browseSearch" type="search" placeholder="Search the files…" autocomplete="off" spellcheck="false">
+      <select id="browseLine">
+        <option value="">All lines</option>
+        <option value="BX">BX</option><option value="UX">UX</option><option value="CX">CX</option><option value="Hasbro">Hasbro</option>
+      </select>
+      <select id="browseType">
+        <option value="">All types</option>
+        <option>Attack</option><option>Defense</option><option>Stamina</option><option>Balance</option>
+      </select>
+      <span id="browseCount" class="muted"></span>
+    </div>
+    <div id="browseCards" class="cards"></div>
+  </section>
+</main>
+
+<footer class="foot">
+  Intelligence compiled from the stats published by Takara Tomy / Hasbro and transcribed by the
+  <a href="https://beyblade.fandom.com" target="_blank" rel="noopener">Beyblade Wiki</a> (CC BY-SA).
+  Assessments compare published numbers only; launch skill, stadium and wear are not in the file.
+</footer>
+
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+<script src="app.js"></script>
+</body>
+</html>

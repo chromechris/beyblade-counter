@@ -1,0 +1,17 @@
+__pycache__/
+.pytest_cache/
+build/
+dist/
+*.spec
+mobile/node_modules/
+mobile/www/
+mobile/android/.gradle/
+mobile/android/build/
+mobile/android/app/build/
+mobile/android/local.properties
+mobile/android/.idea/
+mobile/ios/App/Pods/
+mobile/ios/App/build/
+.claude/
+NEXT_SESSION_PROMPT.md
+*.pyc

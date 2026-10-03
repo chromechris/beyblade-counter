@@ -1,0 +1,17 @@
+{
+  "appId": "app.beycounter",
+  "appName": "Beytelligence",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": false,
+    "backgroundColor": "#070a0f",
+    "adjustMarginsForEdgeToEdge": "auto"
+  },
+  "ios": {
+    "backgroundColor": "#070a0f",
+    "contentInset": "automatic"
+  }
+}
