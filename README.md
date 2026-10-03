@@ -57,7 +57,7 @@ python tools/build_desktop.py        # -> dist/Beytelligence.exe (~30 MB)
 `mobile/` is a [Capacitor](https://capacitorjs.com) project that wraps the web
 app in a native shell. The built debug APK is at
 `mobile/android/app/build/outputs/apk/debug/app-debug.apk` (a copy lands in
-`dist/BeyCounter-debug.apk` next to the Windows exe). Copy it to the
+`dist/Beytelligence-debug.apk` next to the Windows exe). Copy it to the
 phone (USB, Drive, email...), open it and allow "install from unknown sources"
 once. It runs fully offline: the database and every photo are inside the APK,
 and the collection is kept in the app's own storage (use Export to back it up).

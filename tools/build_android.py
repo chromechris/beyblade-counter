@@ -101,7 +101,7 @@ def main() -> None:
     if not APK.exists():
         sys.exit("gradle finished but the APK is missing")
     print(f"\nbuilt {APK} ({APK.stat().st_size / 1e6:.1f} MB)")
-    copy = ROOT / "dist" / "BeyCounter-debug.apk"   # next to the Windows exe, easy to find / send to a phone
+    copy = ROOT / "dist" / "Beytelligence-debug.apk"   # next to the Windows exe, easy to find / send to a phone
     copy.parent.mkdir(exist_ok=True)
     shutil.copy2(APK, copy)
     print(f"copied to {copy}")
