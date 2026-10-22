@@ -12,6 +12,13 @@ Live web app (installable on iPhone / Android, works offline):
 
 No third-party packages are needed (Python 3.10+).
 
+## Documentation
+
+The [wiki](https://github.com/chromechris/beyblade-counter/wiki) covers installing on
+Android and Windows, the web app on iPhone, using the app, how the assessment works,
+building from source and troubleshooting. Its pages live in [`wiki/`](wiki/) in this
+repository; `python tools/publish_wiki.py` pushes them to the GitHub wiki.
+
 ## Web UI (recommended)
 
 ```bash
@@ -238,6 +245,8 @@ tools/fetch_images.py     downloads the product / part photos into web/img/
 tools/make_icons.py       app icons (web/icons/, mobile/assets/) from a product photo, with the reticle
 tools/build_desktop.py    Windows .exe (PyInstaller + pywebview)
 tools/build_android.py    Android .apk (Capacitor + Gradle); tools/sync_mobile.py copies web/ -> mobile/www
+tools/publish_wiki.py     pushes wiki/*.md to the GitHub wiki
+wiki/                     documentation pages (GitHub wiki source)
 web/                      the browser UI: index.html, app.js, style.css, data/, img/, icons/, sw.js, manifest
 mobile/                   Capacitor project (android/ generated; ios/ is created on a Mac)
 .github/workflows/pages.yml   publishes web/ to GitHub Pages
