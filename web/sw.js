@@ -1,10 +1,10 @@
 /* Service worker: makes the app installable and usable offline.
  * Bump SHELL_VERSION whenever index.html / app.js / style.css / the database change.
  * Photos are immutable, so they live in their own cache that survives shell updates. */
-const SHELL_VERSION = 'beytelligence-shell-v3';
+const SHELL_VERSION = 'spintelligence-shell-v4';
 const IMG_CACHE = 'beycounter-img-v1';
 const SHELL = ['./', './index.html', './style.css', './app.js', './manifest.webmanifest', './data/beyblade_x.json',
-  './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png', './icons/favicon.png'];
+  './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png', './icons/favicon.png', './privacy.html'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(SHELL_VERSION).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));

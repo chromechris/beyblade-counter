@@ -1,7 +1,7 @@
-**Beytelligence**
+**Spintelligence**
 
 - [Home](Home.md)
-- [Using Beytelligence](Using-Beytelligence.md)
+- [Using Spintelligence](Using-Spintelligence.md)
 - [How the assessment works](How-the-assessment-works.md)
 
 **Install**

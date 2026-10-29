@@ -2,13 +2,14 @@
   "name": "beycounter-mobile",
   "version": "0.1.0",
   "private": true,
-  "description": "Capacitor wrapper of Beytelligence, the Beyblade X counter picker (Android / iOS)",
+  "description": "Capacitor wrapper of Spintelligence, the Beyblade X counter picker (Android / iOS)",
   "scripts": {
     "sync": "python ../tools/sync_mobile.py && npx cap sync",
     "android": "python ../tools/build_android.py",
     "android:install": "python ../tools/build_android.py --install",
     "open:android": "npx cap open android",
-    "open:ios": "npx cap open ios"
+    "open:ios": "npx cap open ios",
+    "android:release": "python ../tools/build_android.py --release"
   },
   "dependencies": {
     "@capacitor/android": "^7.6.9",

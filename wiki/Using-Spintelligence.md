@@ -1,6 +1,6 @@
-# Using Beytelligence
+# Using Spintelligence
 
-Beytelligence has three screens, numbered like steps in a file: **01 Target analysis**, **02 My arsenal** and **03 Dossiers**. The screens are identical in the web app, the Android app and the Windows app.
+Spintelligence has three screens, numbered like steps in a file: **01 Target analysis**, **02 My arsenal** and **03 Dossiers**. The screens are identical in the web app, the Android app and the Windows app.
 
 ## 01 Target analysis
 

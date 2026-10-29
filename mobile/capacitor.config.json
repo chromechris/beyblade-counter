@@ -1,6 +1,6 @@
 {
-  "appId": "app.beycounter",
-  "appName": "Beytelligence",
+  "appId": "com.chromechris.spintelligence",
+  "appName": "Spintelligence",
   "webDir": "www",
   "server": {
     "androidScheme": "https"

@@ -1,7 +1,7 @@
 """Desktop app: the web UI in a native window (pywebview + WebView2).
 
 Run from source:   python desktop.py
-Build an .exe:     python tools/build_desktop.py   ->  dist/Beytelligence.exe
+Build an .exe:     python tools/build_desktop.py   ->  dist/Spintelligence.exe
 """
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ from pathlib import Path
 
 import webview
 
-APP_NAME = "Beytelligence"
+APP_NAME = "Spintelligence"
 
 
 def resource_root() -> Path:

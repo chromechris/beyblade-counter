@@ -1,6 +1,6 @@
 # Installing on Android
 
-The Android app is a single file, `Beytelligence-debug.apk` (about 20 MB). It contains the whole app, the database and all 369 photos, so it works with no connection at all.
+The Android app is a single file, `Spintelligence-debug.apk` (about 20 MB). It contains the whole app, the database and all 369 photos, so it works with no connection at all.
 
 ## Requirements
 
@@ -10,7 +10,7 @@ The Android app is a single file, `Beytelligence-debug.apk` (about 20 MB). It co
 
 ## Get the APK
 
-Build outputs are not stored in the repository. Get the file from whoever built it (it lands in `dist/Beytelligence-debug.apk` after `npm run android`), from the repository's Releases page when a release is published, or build it yourself: see [Building from source](Building-from-source.md).
+Build outputs are not stored in the repository. Get the file from whoever built it (it lands in `dist/Spintelligence-debug.apk` after `npm run android`), from the repository's Releases page when a release is published, or build it yourself: see [Building from source](Building-from-source.md).
 
 ## Install
 
@@ -18,11 +18,11 @@ Build outputs are not stored in the repository. Get the file from whoever built 
 2. Open the **Files** app, find the APK and tap it.
 3. Android asks to allow installs from this source (Files, Drive, Gmail...). Tap **Settings**, switch **Allow from this source** on, and go back. This is asked once per source app.
 4. Tap **Install**. If Google Play Protect warns that the app is from an unknown developer, choose **More details** and **Install anyway**. The warning appears because the APK is signed with a development key, not because of its contents; the source is open.
-5. Tap **Open**. Beytelligence appears in the app drawer with the reticle icon.
+5. Tap **Open**. Spintelligence appears in the app drawer with the reticle icon.
 
 ## Update
 
-Install the new APK over the old one. The package name (`app.beycounter`) stays the same, so the installation is an upgrade and your arsenal is kept.
+Install the new APK over the old one. The package name (`com.chromechris.spintelligence`) stays the same, so the installation is an upgrade and your arsenal is kept. (The pre-release build named Beytelligence used a different package name; it is a separate app, so export its arsenal and import it into Spintelligence.)
 
 One exception: if the new APK was built on a different computer, its development signing key differs and Android refuses the upgrade with "App not installed". Export your arsenal first (My arsenal, **Export JSON**), uninstall the old app, install the new one and import the file.
 
@@ -32,9 +32,9 @@ The arsenal is stored in the app's private storage (the WebView's local storage)
 
 ## Uninstall
 
-Long-press the icon and choose **Uninstall**, or use Settings, Apps, Beytelligence, Uninstall.
+Long-press the icon and choose **Uninstall**, or use Settings, Apps, Spintelligence, Uninstall.
 
 ## See also
 
-- [Using Beytelligence](Using-Beytelligence.md)
+- [Using Spintelligence](Using-Spintelligence.md)
 - [Troubleshooting and FAQ](Troubleshooting-and-FAQ.md)

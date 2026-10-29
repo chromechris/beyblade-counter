@@ -1,4 +1,4 @@
-"""Generate the Beytelligence app icons (PWA, Android/iOS, Windows .ico) from a product photo.
+"""Generate the Spintelligence app icons (PWA, Android/iOS, Windows .ico) from a product photo.
 
 Usage: python tools/make_icons.py [photo]   (default: web/img/models/DranSword_3-60F.png)
 

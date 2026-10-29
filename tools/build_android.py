@@ -2,6 +2,8 @@ r"""Build the Android debug APK (Capacitor + Gradle).
 
     python tools/build_android.py            ->  mobile/android/app/build/outputs/apk/debug/app-debug.apk
     python tools/build_android.py --install  ->  ... then `adb install -r` on the connected phone / emulator
+    python tools/build_android.py --release  ->  signed Play Store bundle (.aab) + signed release .apk in dist/
+                                                 (needs mobile/android/keystore.properties + the keystore)
 
 What it does:
   1. copies web/ into mobile/www            (tools/sync_mobile.py)
@@ -28,6 +30,8 @@ ROOT = Path(__file__).resolve().parent.parent
 MOBILE = ROOT / "mobile"
 ANDROID = MOBILE / "android"
 APK = ANDROID / "app" / "build" / "outputs" / "apk" / "debug" / "app-debug.apk"
+APK_RELEASE = ANDROID / "app" / "build" / "outputs" / "apk" / "release" / "app-release.apk"
+AAB = ANDROID / "app" / "build" / "outputs" / "bundle" / "release" / "app-release.aab"
 WIN = sys.platform == "win32"
 
 JDK_CANDIDATES = [
@@ -96,20 +100,33 @@ def main() -> None:
     npx = "npx.cmd" if WIN else "npx"
     run([npx, "cap", "sync", "android"], MOBILE, env)
     gradlew = str(ANDROID / ("gradlew.bat" if WIN else "gradlew"))  # full path: cmd may not search "."
-    run([gradlew, "assembleDebug", "--no-daemon"], ANDROID, env)
+    dist = ROOT / "dist"
+    dist.mkdir(exist_ok=True)
 
+    if "--release" in sys.argv:
+        if not (ANDROID / "keystore.properties").exists():
+            sys.exit("mobile/android/keystore.properties is missing: release builds must be signed with the upload key")
+        run([gradlew, "bundleRelease", "assembleRelease", "--no-daemon"], ANDROID, env)
+        for src, name in ((AAB, "Spintelligence-release.aab"), (APK_RELEASE, "Spintelligence-release.apk")):
+            if not src.exists():
+                sys.exit(f"gradle finished but {src} is missing")
+            shutil.copy2(src, dist / name)
+            print(f"built {dist / name} ({src.stat().st_size / 1e6:.1f} MB)")
+        print("upload dist/Spintelligence-release.aab to the Play Console; keep the keystore and its passwords safe")
+        return
+
+    run([gradlew, "assembleDebug", "--no-daemon"], ANDROID, env)
     if not APK.exists():
         sys.exit("gradle finished but the APK is missing")
     print(f"\nbuilt {APK} ({APK.stat().st_size / 1e6:.1f} MB)")
-    copy = ROOT / "dist" / "Beytelligence-debug.apk"   # next to the Windows exe, easy to find / send to a phone
-    copy.parent.mkdir(exist_ok=True)
+    copy = dist / "Spintelligence-debug.apk"   # next to the Windows exe, easy to find / send to a phone
     shutil.copy2(APK, copy)
     print(f"copied to {copy}")
 
     if "--install" in sys.argv:
         adb = shutil.which("adb", path=env["PATH"]) or "adb"
         run([adb, "install", "-r", str(APK)], ANDROID, env)
-        run([adb, "shell", "monkey", "-p", "app.beycounter", "-c", "android.intent.category.LAUNCHER", "1"], ANDROID, env)
+        run([adb, "shell", "monkey", "-p", "com.chromechris.spintelligence", "-c", "android.intent.category.LAUNCHER", "1"], ANDROID, env)
 
 
 if __name__ == "__main__":

@@ -1,12 +1,12 @@
 # Web app on iPhone and Android
 
-The web app at **https://chromechris.github.io/beyblade-counter/** is the same Beytelligence as the Android and Windows apps, served over HTTPS. It installs to the home screen without an app store and works offline after the first visit. On iPhone this is the way to run Beytelligence, since a native iOS build needs a Mac to compile.
+The web app at **https://chromechris.github.io/beyblade-counter/** is the same Spintelligence as the Android and Windows apps, served over HTTPS. It installs to the home screen without an app store and works offline after the first visit. On iPhone this is the way to run Spintelligence, since a native iOS build needs a Mac to compile.
 
 ## iPhone and iPad
 
 1. Open the URL in **Safari** (other browsers on iOS cannot install web apps).
 2. Tap the **Share** button, then **Add to Home Screen**, then **Add**.
-3. Open Beytelligence from the home screen. It runs full-screen with its own icon.
+3. Open Spintelligence from the home screen. It runs full-screen with its own icon.
 4. Leave it open for a few seconds on first use. When the toast **"Offline cache secured: 369 photos saved on this device"** appears, everything is on the phone and the app works in airplane mode.
 
 ## Android (web version)
@@ -15,7 +15,7 @@ Open the URL in Chrome and choose **Install app** from the menu (or tap the inst
 
 ## Desktop browsers
 
-Chrome and Edge offer **Install Beytelligence** in the address bar. The Windows exe ([Installing on Windows](Installing-on-Windows.md)) is the alternative when you prefer a plain program.
+Chrome and Edge offer **Install Spintelligence** in the address bar. The Windows exe ([Installing on Windows](Installing-on-Windows.md)) is the alternative when you prefer a plain program.
 
 ## Updates
 

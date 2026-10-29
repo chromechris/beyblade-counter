@@ -1,10 +1,11 @@
-/* Beytelligence (Beyblade X Counter Picker) - browser UI.
+/* Spintelligence (Beyblade X Counter Picker) - browser UI.
  * Same data and the same matchup model as beycounter/engine.py (kept in sync by hand). */
 (() => {
   'use strict';
 
   const DATA_URLS = ['data/beyblade_x.json', '../beycounter/data/beyblade_x.json'];
   const LS_KEY = 'beycounter.collection';
+  const VERSION = '1.0.0';
   const SLOT_ORDER = ['blade', 'lock_chip', 'main_blade', 'assist_blade', 'assist_blade_2', 'ratchet', 'bit'];
   const BEATS = { Attack: 'Stamina', Stamina: 'Defense', Defense: 'Attack' };
   const K = { KO_SCALE: 25, BURST_SCALE: 30, SPIN_SCALE: 20, DASH_WEIGHT: 0.25, WEIGHT_PER_GRAM: 2.0, TYPE_BONUS: 1.1, MARGIN_GAIN: 3.0 };
@@ -381,6 +382,24 @@
     $('#modal').dataset.id = m.id;
   }
 
+  function showAbout() {
+    $('#modalBody').innerHTML = `
+      <div class="modal-head"><span>About // Spintelligence</span><span>v${VERSION}</span></div>
+      <div class="modal-inner about">
+        <div class="name">Spintelligence</div>
+        <p class="meta">Beyblade X counter intelligence &middot; unofficial fan-made tool</p>
+        <h3>Not affiliated</h3>
+        <p>Spintelligence is an independent fan project. It is not affiliated with, endorsed by or sponsored by Takara Tomy, Hasbro or the Beyblade franchise. Beyblade and Beyblade X are trademarks of their respective owners. Product names and photos appear only to identify the parts.</p>
+        <h3>Data and licences</h3>
+        <p>Part and product stats as published by Takara Tomy / Hasbro and transcribed by the <a href="https://beyblade.fandom.com" target="_blank" rel="noopener">Beyblade Wiki</a> (CC BY-SA 3.0): ${DB ? DB.modelsList.length : 0} models, ${DB ? DB.partsList.length : 0} parts. Assessments compare published numbers only.</p>
+        <h3>Privacy</h3>
+        <p>No account, no tracking, no server. Your arsenal stays on this device. <a href="privacy.html">Read the privacy policy.</a></p>
+        <h3>Source</h3>
+        <p><a href="https://github.com/chromechris/beyblade-counter" target="_blank" rel="noopener">github.com/chromechris/beyblade-counter</a></p>
+      </div>`;
+    $('#modal').classList.remove('hidden');
+  }
+
   function findModel(id) { return DB.models.get(id) || collectionModels().find(m => m.id === id) || null; }
 
   let toastTimer = null;
@@ -465,7 +484,7 @@
   function exportCollection() {
     const blob = new Blob([JSON.stringify(collection, null, 1)], { type: 'application/json' });
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob); a.download = 'beytelligence_arsenal.json'; a.click();
+    a.href = URL.createObjectURL(blob); a.download = 'spintelligence_arsenal.json'; a.click();
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   }
   function importCollection(file) {
@@ -556,6 +575,7 @@
       if (card) { const m = findModel(card.dataset.id); if (m) showModel(m); }
     });
     $('#modalClose').addEventListener('click', () => $('#modal').classList.add('hidden'));
+    $('#aboutBtn').addEventListener('click', showAbout);
     $('#modal').addEventListener('click', e => { if (e.target.id === 'modal') $('#modal').classList.add('hidden'); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') $('#modal').classList.add('hidden'); });
 

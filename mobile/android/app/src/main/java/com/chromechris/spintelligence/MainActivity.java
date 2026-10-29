@@ -1,4 +1,4 @@
-package app.beycounter;
+package com.chromechris.spintelligence;
 
 import com.getcapacitor.BridgeActivity;
 

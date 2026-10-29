@@ -32,7 +32,7 @@
 
 **Where is my arsenal?** Android: the app's private storage. Windows: `%APPDATA%\BeybladeCounter`. Web: the browser's local storage for the site. In all cases *Export JSON* makes a portable copy and *Import JSON* restores it anywhere, including the Python CLI.
 
-**How do I reset everything?** Android: Settings, Apps, Beytelligence, Clear data. Windows: delete `%APPDATA%\BeybladeCounter`. Web: clear the site's data, or use *Wipe arsenal*.
+**How do I reset everything?** Android: Settings, Apps, Spintelligence, Clear data. Windows: delete `%APPDATA%\BeybladeCounter`. Web: clear the site's data, or use *Wipe arsenal*.
 
 **Can two devices share one arsenal?** Not automatically; there is no account or sync. Export on one, import on the other.
 

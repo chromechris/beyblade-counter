@@ -1,4 +1,4 @@
-/* Beytelligence - field intelligence console theme */
+/* Spintelligence - field intelligence console theme */
 :root {
   --bg: #070a0f;
   --panel: #0d131c;
@@ -24,6 +24,7 @@
   --mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, "Roboto Mono", "Liberation Mono", monospace;
   --sans: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
+:root { color-scheme: dark; }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 html, body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.45 var(--sans); }
@@ -45,9 +46,10 @@ h2::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg
 .label { margin: 12px 0 2px; font: 700 10px/1.4 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--dim); }
 
 /* ---------------------------------------------------------------- header */
-.head { position: sticky; top: 0; z-index: 20; }
-.classbar { display: flex; justify-content: space-between; gap: 12px; background: var(--accent2); color: #1a1200; font: 700 10px/1.5 var(--mono); letter-spacing: .22em; text-transform: uppercase; padding: 3px 14px; padding-top: calc(3px + env(safe-area-inset-top)); padding-left: calc(14px + env(safe-area-inset-left)); padding-right: calc(14px + env(safe-area-inset-right)); }
-.topbar { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 12px 20px; padding-left: calc(20px + env(safe-area-inset-left)); padding-right: calc(20px + env(safe-area-inset-right)); border-bottom: 1px solid var(--border); background: linear-gradient(180deg, #0f1622, #070a0f); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 30; }
+.head { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; }
+.classbar { display: flex; justify-content: space-between; gap: 12px; background: var(--accent2); color: #1a1200; font: 700 10px/1.5 var(--mono); letter-spacing: .22em; text-transform: uppercase; padding: 3px max(14px, env(safe-area-inset-right, 0px)) 3px max(14px, env(safe-area-inset-left, 0px)); }
+.topbar { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 12px max(20px, env(safe-area-inset-right, 0px)) 12px max(20px, env(safe-area-inset-left, 0px)); border-bottom: 1px solid var(--border); background: linear-gradient(180deg, #0f1622, #070a0f); }
 .topbar::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, transparent 0 3px, #00000022 3px 4px); }
 .brand { display: flex; align-items: center; gap: 14px; position: relative; z-index: 1; }
 .logo { position: relative; width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--accent); display: grid; place-items: center; color: var(--accent); box-shadow: 0 0 0 4px #46e39a1a, inset 0 0 14px #46e39a33, 0 0 18px #46e39a33; flex: none; }
@@ -66,10 +68,25 @@ h2::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg
 .tab.active .k { color: var(--accent); }
 .pill { display: inline-block; min-width: 20px; padding: 1px 6px; border-radius: 3px; background: var(--accent2); color: #1a1200; font: 700 11px/1.5 var(--mono); text-align: center; }
 
-main { max-width: 1280px; margin: 0 auto; padding: 18px 16px 40px; padding-left: calc(16px + env(safe-area-inset-left)); padding-right: calc(16px + env(safe-area-inset-right)); padding-bottom: calc(40px + env(safe-area-inset-bottom)); }
+main { max-width: 1280px; margin: 0 auto; padding-block: 18px calc(40px + env(safe-area-inset-bottom, 0px)); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 .tab-panel { display: none; }
 .tab-panel.active { display: block; }
-.foot { max-width: 1280px; margin: 0 auto; padding: 14px 16px 30px; padding-bottom: calc(30px + env(safe-area-inset-bottom)); color: var(--dim); font: 11px/1.6 var(--mono); border-top: 1px solid var(--border); }
+.foot { max-width: 1280px; margin: 0 auto; padding-block: 14px calc(30px + env(safe-area-inset-bottom, 0px)); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); color: var(--dim); font: 11px/1.6 var(--mono); border-top: 1px solid var(--border); }
+.foot p.legal { margin: 0 0 8px; max-width: 900px; }
+.foot .links { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 10px; }
+.linkbtn { background: none; border: 0; padding: 0; color: var(--accent); font: inherit; cursor: pointer; text-decoration: underline; }
+.about p { margin: 0 0 10px; line-height: 1.5; }
+.about h3 { margin: 14px 0 4px; font: 700 10px/1.4 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--dim); }
+.about .name { font-size: 1.3rem; font-weight: 800; }
+.about .meta, .doc .meta { color: var(--muted); font: 11px/1.6 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+/* long-form pages (privacy policy) */
+.doc { max-width: 780px; line-height: 1.6; }
+.doc h1 { font-size: 1.6rem; margin: 8px 0 4px; }
+.doc h2 { margin-top: 26px; }
+.doc p, .doc li { color: var(--text); }
+.doc ul { padding-left: 20px; }
+.doc li { margin: 6px 0; }
+.doc code { font: 12px var(--mono); background: var(--panel2); padding: 1px 5px; border-radius: 3px; }
 
 /* ---------------------------------------------------------------- finder */
 .finder { display: grid; grid-template-columns: 380px 1fr; gap: 22px; }
@@ -216,7 +233,7 @@ main { max-width: 1280px; margin: 0 auto; padding: 18px 16px 40px; padding-left:
 @media (max-width: 700px) {
   .classbar { justify-content: center; }
   .classbar span:not(.mid) { display: none; }
-  .topbar { padding: 10px 14px; padding-left: calc(14px + env(safe-area-inset-left)); padding-right: calc(14px + env(safe-area-inset-right)); gap: 10px; }
+  .topbar { padding: 10px max(14px, env(safe-area-inset-right, 0px)) 10px max(14px, env(safe-area-inset-left, 0px)); gap: 10px; }
   h1 { font-size: 1.1rem; }
   .tabs { width: 100%; }
   .tab { flex: 1; justify-content: center; padding: 9px 4px; font-size: 11px; letter-spacing: .06em; }

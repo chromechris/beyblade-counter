@@ -1,6 +1,6 @@
 # Installing on Windows
 
-The Windows app is a single file, `Beytelligence.exe` (about 29 MB). There is nothing to install: run it and the app opens in its own window. It needs no Python and no internet connection.
+The Windows app is a single file, `Spintelligence.exe` (about 29 MB). There is nothing to install: run it and the app opens in its own window. It needs no Python and no internet connection.
 
 ## Requirements
 
@@ -9,11 +9,11 @@ The Windows app is a single file, `Beytelligence.exe` (about 29 MB). There is no
 
 ## Get the file
 
-Build outputs are not stored in the repository. Get `Beytelligence.exe` from whoever built it (it lands in `dist/` after `python tools/build_desktop.py`), from the repository's Releases page when a release is published, or build it yourself: see [Building from source](Building-from-source.md).
+Build outputs are not stored in the repository. Get `Spintelligence.exe` from whoever built it (it lands in `dist/` after `python tools/build_desktop.py`), from the repository's Releases page when a release is published, or build it yourself: see [Building from source](Building-from-source.md).
 
 ## First run
 
-1. Double-click `Beytelligence.exe`. The first start takes a few seconds while the single file unpacks itself; later starts are faster.
+1. Double-click `Spintelligence.exe`. The first start takes a few seconds while the single file unpacks itself; later starts are faster.
 2. SmartScreen may show **"Windows protected your PC"** because the file is not code-signed. Click **More info**, then **Run anyway**. This happens once per download location.
 3. Some antivirus products flag any PyInstaller-packed program as suspicious. The source is open and the build is reproducible; add an exception if your product blocks the file.
 
@@ -25,7 +25,7 @@ The arsenal is stored in `%APPDATA%\BeybladeCounter` (the folder name is kept fr
 
 ## Update
 
-Replace `Beytelligence.exe` with the new file. Nothing else changes and your arsenal stays.
+Replace `Spintelligence.exe` with the new file. Nothing else changes and your arsenal stays.
 
 ## Portable use
 
@@ -33,5 +33,5 @@ The exe can live on a USB stick, but the data folder is per Windows user profile
 
 ## See also
 
-- [Using Beytelligence](Using-Beytelligence.md)
+- [Using Spintelligence](Using-Spintelligence.md)
 - [Troubleshooting and FAQ](Troubleshooting-and-FAQ.md)

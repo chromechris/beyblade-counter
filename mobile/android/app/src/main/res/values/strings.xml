@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Beytelligence</string>
-    <string name="title_activity_main">Beytelligence</string>
-    <string name="package_name">app.beycounter</string>
-    <string name="custom_url_scheme">app.beycounter</string>
+    <string name="app_name">Spintelligence</string>
+    <string name="title_activity_main">Spintelligence</string>
+    <string name="package_name">com.chromechris.spintelligence</string>
+    <string name="custom_url_scheme">com.chromechris.spintelligence</string>
 </resources>

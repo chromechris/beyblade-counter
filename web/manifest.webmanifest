@@ -1,7 +1,7 @@
 {
-  "name": "Beytelligence",
-  "short_name": "Beytelligence",
-  "description": "Study any Beyblade X opponent and get the counter that beats it, from every official model or from your own arsenal.",
+  "name": "Spintelligence",
+  "short_name": "Spintelligence",
+  "description": "Unofficial fan-made Beyblade X counter picker: study the target and get the counter that beats it, from every official model or from your own arsenal.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

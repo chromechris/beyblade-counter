@@ -1,6 +1,6 @@
-# Beytelligence
+# Spintelligence
 
-*Beyblade X counter intelligence.* Beytelligence studies the Beyblade you are
+*Beyblade X counter intelligence.* Spintelligence studies the Beyblade you are
 about to face and tells you which model is the most effective counter, using
 only the official published part stats. It also keeps your own arsenal and
 picks the best bey *you own* for any target. The UI is styled as a classified
@@ -9,6 +9,13 @@ and field notes - because the way to beat an opponent is to study it first.
 
 Live web app (installable on iPhone / Android, works offline):
 **https://chromechris.github.io/beyblade-counter/**
+
+> **Spintelligence is an unofficial fan-made tool.** It is not affiliated with, endorsed by
+> or sponsored by Takara Tomy, Hasbro or the Beyblade franchise. Beyblade and Beyblade X are
+> trademarks of their respective owners; product names and photos are used only to identify
+> the parts. Stats are the values published by Takara Tomy / Hasbro as transcribed by the
+> [Beyblade Wiki](https://beyblade.fandom.com) (CC BY-SA). No data is collected:
+> see the [privacy policy](https://chromechris.github.io/beyblade-counter/privacy.html).
 
 No third-party packages are needed (Python 3.10+).
 
@@ -45,7 +52,7 @@ The arsenal is kept in the browser's local storage. Photos live in
 
 ## Windows desktop app (.exe)
 
-`dist/Beytelligence.exe` is a single-file desktop program: double-click it and
+`dist/Spintelligence.exe` is a single-file desktop program: double-click it and
 the same UI opens in its own window (it uses the WebView2 engine that ships
 with Windows 10/11). No Python needed on the target PC. The arsenal is saved
 in `%APPDATA%\BeybladeCounter`, so it survives updates of the exe.
@@ -54,7 +61,7 @@ Rebuild it after changing the web app or the database:
 
 ```bash
 pip install pyinstaller pywebview
-python tools/build_desktop.py        # -> dist/Beytelligence.exe (~30 MB)
+python tools/build_desktop.py        # -> dist/Spintelligence.exe (~30 MB)
 ```
 
 `python desktop.py` runs the same window straight from source.
@@ -64,7 +71,7 @@ python tools/build_desktop.py        # -> dist/Beytelligence.exe (~30 MB)
 `mobile/` is a [Capacitor](https://capacitorjs.com) project that wraps the web
 app in a native shell. The built debug APK is at
 `mobile/android/app/build/outputs/apk/debug/app-debug.apk` (a copy lands in
-`dist/Beytelligence-debug.apk` next to the Windows exe). Copy it to the
+`dist/Spintelligence-debug.apk` next to the Windows exe). Copy it to the
 phone (USB, Drive, email...), open it and allow "install from unknown sources"
 once. It runs fully offline: the database and every photo are inside the APK,
 and the collection is kept in the app's own storage (use Export to back it up).
@@ -100,8 +107,21 @@ Things that bit once, so you do not have to find them again:
   `mobile/android/app/src/main/res/values/styles.xml` paints the bands behind the
   system bars dark; keep both if you regenerate the Android project.
 
-To put it on the Play Store you would need a release keystore and a Google
-Play developer account; the debug APK is for your own devices.
+### Play Store build
+
+```bash
+cd mobile
+npm run android:release      # = python ../tools/build_android.py --release
+```
+
+This produces the signed app bundle `dist/Spintelligence-release.aab` (what the
+Play Console takes) and a signed `dist/Spintelligence-release.apk` for sideloading.
+Signing needs `mobile/android/keystore.properties` and the upload keystore it
+names (both git-ignored; back them up, Play cannot replace a lost upload key).
+The package name is `com.chromechris.spintelligence`, the build targets
+Android 16 (API 36), and `store/play-listing.md` holds the listing text and the
+answers for the console's policy forms. Bump `versionCode` in
+`mobile/android/app/build.gradle` before every upload.
 
 ## iPhone / iPad
 

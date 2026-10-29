@@ -39,7 +39,7 @@ python tools/make_icons.py                # web/icons/ and mobile/assets/ from a
 
 ```bash
 pip install pyinstaller pywebview
-python tools/build_desktop.py             # -> dist/Beytelligence.exe (about 29 MB)
+python tools/build_desktop.py             # -> dist/Spintelligence.exe (about 29 MB)
 ```
 
 `desktop.py` runs the same window from source. The exe bundles the whole `web/` folder and serves it to a WebView2 window from a local port; the arsenal is kept in `%APPDATA%\BeybladeCounter`.
@@ -49,7 +49,7 @@ python tools/build_desktop.py             # -> dist/Beytelligence.exe (about 29 
 ```bash
 cd mobile
 npm install
-npm run android                           # -> android/app/build/outputs/apk/debug/app-debug.apk and dist/Beytelligence-debug.apk
+npm run android                           # -> android/app/build/outputs/apk/debug/app-debug.apk and dist/Spintelligence-debug.apk
 npm run android:install                   # same, then adb install -r and launch on the connected phone
 ```
 
@@ -62,7 +62,15 @@ Things that go wrong, and why:
 - **`gradlew.bat` not recognised** when the shell has `NoDefaultCurrentDirectoryInExePath` set: call it by full path.
 - **Status bar overlaps the header on Android 15.** Keep `android.adjustMarginsForEdgeToEdge: "auto"` in `capacitor.config.json` and the dark `windowBackground` in `AppTheme.NoActionBar` if you regenerate the Android project.
 
-Opening `mobile/android` in Android Studio also works (Build, Build APK(s)) once its Gradle JDK is set to 21. A Play Store release would need a release keystore and a developer account; the debug APK is for your own devices.
+Opening `mobile/android` in Android Studio also works (Build, Build APK(s)) once its Gradle JDK is set to 21.
+
+### Play Store bundle
+
+```bash
+npm run android:release                   # -> dist/Spintelligence-release.aab (+ a signed release .apk)
+```
+
+Release builds are signed with the upload keystore named in `mobile/android/keystore.properties` (git-ignored, next to the keystore itself). Keep both backed up: Google Play cannot replace a lost upload key. Bump `versionCode` in `mobile/android/app/build.gradle` before each upload. The listing text and the console form answers are in `store/play-listing.md`.
 
 ## iOS (on a Mac)
 
