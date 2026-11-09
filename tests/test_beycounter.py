@@ -88,3 +88,10 @@ def test_custom_line_custom_combo(db):
     m = db.make_custom("Brave", "6-60", "V", assist="Slash", lock_chip="Dran")
     official = db.get("DranBrave S6-60V")
     assert db.totals(m).as_dict() == db.totals(official).as_dict()
+
+
+def test_best_path_tie_order_matches_web_app():
+    from beycounter.engine import Pressure
+    assert Pressure(0.6, 0.6, 0.6).best_path == "knock-out"
+    assert Pressure(0.2, 0.6, 0.6).best_path == "burst"
+    assert Pressure(0.2, 0.3, 0.6).best_path == "spin finish"

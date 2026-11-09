@@ -1,4 +1,4 @@
-"""Serve the web UI locally:  python serve.py [port]   (default 8792)
+"""Serve the Spintelligence web UI locally:  python serve.py [port]   (default 8792)
 
 Opens http://localhost:<port>/web/ in your browser. Ctrl+C stops it.
 """
@@ -23,7 +23,7 @@ def main() -> None:
     handler = functools.partial(Quiet, directory=str(ROOT))
     with http.server.ThreadingHTTPServer(("127.0.0.1", PORT), handler) as httpd:
         url = f"http://localhost:{PORT}/web/"
-        print(f"Beyblade X Counter Picker -> {url}   (Ctrl+C to stop)")
+        print(f"Spintelligence -> {url}   (Ctrl+C to stop)")
         threading.Timer(0.6, lambda: webbrowser.open(url)).start()
         try:
             httpd.serve_forever()

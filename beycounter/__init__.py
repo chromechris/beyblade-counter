@@ -1,2 +1,2 @@
 """Beyblade X counter-picker: official part/model database + matchup engine."""
-__version__ = "0.1.0"
+__version__ = "1.0.0"

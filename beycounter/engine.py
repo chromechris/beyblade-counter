@@ -62,7 +62,13 @@ class Pressure:
 
     @property
     def best_path(self) -> str:
-        return max((self.ko, "knock-out"), (self.burst, "burst"), (self.spin, "spin finish"))[1]
+        # on an exact tie prefer knock-out, then burst, then spin finish (same order as web/app.js)
+        best = self.best
+        if self.ko == best:
+            return "knock-out"
+        if self.burst == best:
+            return "burst"
+        return "spin finish"
 
     @property
     def combined(self) -> float:

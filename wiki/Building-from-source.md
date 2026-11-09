@@ -16,7 +16,7 @@ Everything is built from one repository: https://github.com/chromechris/beyblade
 ```bash
 git clone https://github.com/chromechris/beyblade-counter.git
 cd beyblade-counter
-python -m pytest            # 8 tests
+python -m pytest            # 9 tests
 python serve.py             # opens http://localhost:8792/web/
 ```
 

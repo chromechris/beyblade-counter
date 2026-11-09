@@ -21,7 +21,7 @@ One web core (`web/`, plain HTML/CSS/JS, no build step) is shipped four ways:
 | Android debug APK | `dist/Spintelligence-debug.apk` | `cd mobile && npm run android` (= `python tools/build_android.py`) | verified on an Android 15 emulator offline |
 | Android Play bundle | `dist/Spintelligence-release.aab` (+ signed `.apk`) | `npm run android:release` (= `build_android.py --release`) | built and signed; **not uploaded**, see Play section |
 | Windows exe | `dist/Spintelligence.exe` | `python tools/build_desktop.py` (PyInstaller + pywebview/WebView2) | built |
-| Python engine + CLI | `beycounter/` | `python -m beycounter ...`, tests `python -m pytest` (8) | same model as the web app |
+| Python engine + CLI | `beycounter/` | `python -m beycounter ...`, tests `python -m pytest` (9) | same model as the web app |
 | iOS | `mobile/` (Capacitor) | `npx cap add ios` on a Mac; no Mac available | iPhone uses the PWA |
 
 Docs: `README.md` (user-facing), `wiki/` (nine pages, source of the GitHub wiki), `store/play-listing.md`
