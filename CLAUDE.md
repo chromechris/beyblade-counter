@@ -22,7 +22,7 @@ One web core (`web/`, plain HTML/CSS/JS, no build step) is shipped four ways:
 | Android Play bundle | `dist/Spintelligence-release.aab` (+ signed `.apk`) | `npm run android:release` (= `build_android.py --release`) | version 1 live on the internal testing track (2026-11-11); see Open items |
 | Windows exe | `dist/Spintelligence.exe` | `python tools/build_desktop.py` (PyInstaller + pywebview/WebView2) | built |
 | Python engine + CLI | `beycounter/` | `python -m beycounter ...`, tests `python -m pytest` (9) | same model as the web app |
-| iOS | `mobile/` (Capacitor) | `npx cap add ios` on a Mac; no Mac available | iPhone uses the PWA |
+| iOS app | `mobile/ios/` (Capacitor, SPM, iPhone only) | GitHub Actions `.github/workflows/ios.yml` on macOS (manual run; `upload` = TestFlight) | project + workflow added 2026-11-12; not yet built in the cloud; iPhone uses the PWA until then |
 
 Docs: `README.md` (user-facing), `wiki/` (nine pages, source of the GitHub wiki), `store/play-listing.md`
 (Play Console text and form answers), and a whitepaper that lives as a Claude Doc (link in the agent memory
@@ -44,11 +44,13 @@ only on this PC.
 beycounter/        Python engine (engine.py = scoring model), database loader, collection, CLI, data/beyblade_x.json
 web/               index.html, app.js (same model as engine.py, UI), style.css (theme), sw.js (offline cache),
                    manifest.webmanifest, privacy.html, data/beyblade_x.json, img/ (369 photos), icons/
-mobile/            Capacitor 7 project: capacitor.config.json, android/ (generated project, committed), assets/ (icon sources)
+mobile/            Capacitor 7 project: capacitor.config.json, android/ and ios/ (generated projects, committed), assets/ (icon sources)
                    android/keystore.properties + release.keystore = upload key, GIT-IGNORED, never commit or print
-store/             Play listing text, feature-graphic.png, icon-512.png, screenshots/ (git-ignored)
+store/             Play listing (play-listing.md) and App Store listing (app-store-listing.md), feature-graphic.png,
+                   icon-512.png, screenshots/ and screenshots-ios/ (PNGs git-ignored)
 tools/             build_database.py (wiki scrape -> JSON, --offline uses tools/cache), fetch_images.py, make_icons.py,
-                   make_store_assets.py, build_desktop.py, build_android.py, sync_mobile.py, build_artifact.py, publish_wiki.py
+                   make_store_assets.py, make_ios_assets.py, make_ios_screenshots.mjs, build_desktop.py, build_android.py,
+                   sync_mobile.py, build_artifact.py, publish_wiki.py
 wiki/              documentation pages; tools/publish_wiki.py pushes them to the GitHub wiki
 tests/             pytest for engine + database
 .github/           Pages deployment workflow (runs on pushes that touch web/)
@@ -73,6 +75,10 @@ tests/             pytest for engine + database
   `android/app/src/main/res/values/styles.xml`; keep both if the project is regenerated.
 - **Release signing**: `android/app/build.gradle` reads `keystore.properties` if present and signs release
   builds with it. Bump `versionCode` before every Play upload.
+- **iOS**: `capacitor.config.json` uses `contentInset: "never"` because the CSS already pads with
+  `env(safe-area-inset-*)`; Info.plist sets light status bar text, `ITSAppUsesNonExemptEncryption` = false and
+  arm64; `TARGETED_DEVICE_FAMILY = 1` keeps it iPhone-only (no iPad screenshots needed). `npx cap add/sync ios`
+  on Windows ends with a harmless CocoaPods error; the SPM project is fine.
 - **Desktop**: `desktop.py` serves `web/` on 127.0.0.1 and opens a pywebview window; PyInstaller bundles it.
 
 ## Toolchain that is known to work on this PC
@@ -112,4 +118,8 @@ with PyInstaller, pywebview, Pillow, pytest. `build_android.py` forces the JDK a
 - Play automatic protection (on by default) requires `minSdkVersion` 24, set in `mobile/android/variables.gradle`.
 - GitHub wiki: owner clicks "Create the first page", then `python tools/publish_wiki.py`.
 - Optional: GitHub Release with the APK and exe attached; a LICENSE file; the 7 missing photos; code
-  signing for the Windows exe; native iOS build when a Mac is available.
+  signing for the Windows exe.
+- App Store: owner creates the app record + an Admin API key and adds the secrets ASC_KEY_ID, ASC_ISSUER_ID,
+  ASC_KEY_P8, APPLE_TEAM_ID (steps in `store/app-store-listing.md`); then run the workflow with upload on,
+  TestFlight check, fill the listing, submit for review (ask the owner first). Apple may object to the
+  trademark/photos (guideline 5.2) or call it a web wrapper (4.2); the owner chose to submit as-is.

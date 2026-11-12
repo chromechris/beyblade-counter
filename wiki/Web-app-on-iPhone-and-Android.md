@@ -1,6 +1,6 @@
 # Web app on iPhone and Android
 
-The web app at **https://chromechris.github.io/beyblade-counter/** is the same Spintelligence as the Android and Windows apps, served over HTTPS. It installs to the home screen without an app store and works offline after the first visit. On iPhone this is the way to run Spintelligence, since a native iOS build needs a Mac to compile.
+The web app at **https://chromechris.github.io/beyblade-counter/** is the same Spintelligence as the Android and Windows apps, served over HTTPS. It installs to the home screen without an app store and works offline after the first visit. On iPhone this is the way to run Spintelligence until the native app is on the App Store.
 
 ## iPhone and iPad
 

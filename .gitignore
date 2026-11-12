@@ -20,3 +20,4 @@ mobile/android/release.keystore
 *.jks
 *.keystore
 store/screenshots/*.png
+store/screenshots-ios/*.png

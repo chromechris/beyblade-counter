@@ -125,8 +125,10 @@ answers for the console's policy forms. Bump `versionCode` in
 
 ## iPhone / iPad
 
-An iOS app can only be compiled on a Mac with Xcode, which cannot be done from
-Windows. Two options:
+The native iOS app is the Capacitor project in `mobile/ios/` (iPhone only,
+bundle ID `com.chromechris.spintelligence`). It is compiled on a GitHub macOS
+runner, so no Mac is needed; until it is on the App Store, iPhones use the web
+app.
 
 ### Install it as a web app (no Mac needed)
 
@@ -148,22 +150,18 @@ list of files it pre-caches. To try the offline behaviour on the PC, run
 `python serve.py` (the service worker also registers on `localhost`), load the
 page once, stop the server and reload.
 
-### Native build on a Mac
+### Native app (App Store / TestFlight)
 
-```bash
-cd mobile
-npm install
-python ../tools/sync_mobile.py
-npx cap add ios          # creates mobile/ios from capacitor.config.json
-npx cap sync ios
-npx cap open ios         # opens the project in Xcode: pick your team, build, run on the phone
-```
-
-The app id (`app.beycounter`), name, colours and the icon source
-(`mobile/assets/`) are already configured; run
-`npx @capacitor/assets generate --ios` after `cap add ios` to create the icon
-set. A free Apple ID can sign the app for your own phone (re-sign every 7 days);
-TestFlight / App Store need a paid developer account.
+GitHub -> Actions -> **iOS build** -> *Run workflow*
+(`.github/workflows/ios.yml`). With *upload* off it is a compile check for the
+Simulator; with *upload* on it signs the app automatically with an App Store
+Connect API key and uploads it to TestFlight. The four repository secrets it
+needs, the App Store listing text and the review answers are in
+`store/app-store-listing.md`. `python tools/make_ios_assets.py` refreshes the
+iOS icon and splash from `mobile/assets/`, and
+`node tools/make_ios_screenshots.mjs` renders the 6.9" iPhone screenshots into
+`store/screenshots-ios/`. To build on a Mac instead:
+`cd mobile && npx cap sync ios && npx cap open ios`.
 
 ## Command line
 
@@ -268,7 +266,8 @@ tools/build_android.py    Android .apk (Capacitor + Gradle); tools/sync_mobile.p
 tools/publish_wiki.py     pushes wiki/*.md to the GitHub wiki
 wiki/                     documentation pages (GitHub wiki source)
 web/                      the browser UI: index.html, app.js, style.css, data/, img/, icons/, sw.js, manifest
-mobile/                   Capacitor project (android/ generated; ios/ is created on a Mac)
+mobile/                   Capacitor project (android/ and ios/, both generated and committed)
 .github/workflows/pages.yml   publishes web/ to GitHub Pages
+.github/workflows/ios.yml     builds the iOS app on a macOS runner, optionally uploads to TestFlight
 tests/test_beycounter.py
 ```

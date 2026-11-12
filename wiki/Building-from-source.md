@@ -11,7 +11,7 @@ Everything is built from one repository: https://github.com/chromechris/beyblade
 | Icons | `pip install Pillow` |
 | Windows exe | `pip install pyinstaller pywebview` |
 | Android APK | Node 20+, JDK 21, Android SDK (platform 35, build-tools 34+) |
-| iOS app | A Mac with Xcode (see below) |
+| iOS app | GitHub Actions macOS runner (no Mac needed), or a Mac with Xcode |
 
 ```bash
 git clone https://github.com/chromechris/beyblade-counter.git
@@ -72,19 +72,16 @@ npm run android:release                   # -> dist/Spintelligence-release.aab (
 
 Release builds are signed with the upload keystore named in `mobile/android/keystore.properties` (git-ignored, next to the keystore itself). Keep both backed up: Google Play cannot replace a lost upload key. Bump `versionCode` in `mobile/android/app/build.gradle` before each upload. The listing text and the console form answers are in `store/play-listing.md`.
 
-## iOS (on a Mac)
+## iOS
+
+The Xcode project lives in `mobile/ios/` (Capacitor with Swift Package Manager, iPhone only). Without a Mac, build it in the cloud: GitHub -> Actions -> **iOS build** -> *Run workflow*. With *upload* off the workflow only compiles for the Simulator; with *upload* on it signs the app automatically (App Store Connect API key in the repository secrets) and uploads it to TestFlight. Setup steps, listing text and review answers: `store/app-store-listing.md`.
 
 ```bash
-cd mobile
-npm install
-python ../tools/sync_mobile.py
-npx cap add ios
-npx @capacitor/assets generate --ios
-npx cap sync ios
-npx cap open ios                          # Xcode: pick your team, build, run on the phone
+python tools/make_ios_assets.py           # icon + splash from mobile/assets/ into the Xcode asset catalog
+node tools/make_ios_screenshots.mjs       # 1320x2868 App Store screenshots -> store/screenshots-ios/
 ```
 
-A free Apple ID signs the app for your own phone (re-sign every 7 days); TestFlight and the App Store need a paid developer account. Until then, iPhones use the web app.
+On a Mac: `cd mobile && npm install && python3 ../tools/sync_mobile.py && npx cap sync ios && npx cap open ios`, pick your team in Xcode, build and run.
 
 ## Keeping the engine in sync
 
