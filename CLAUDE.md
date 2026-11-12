@@ -19,7 +19,7 @@ One web core (`web/`, plain HTML/CSS/JS, no build step) is shipped four ways:
 | --- | --- | --- | --- |
 | Web app / PWA | https://chromechris.github.io/beyblade-counter/ | push to `main` -> `.github/workflows/pages.yml` publishes `web/` | live, installable, offline after first visit |
 | Android debug APK | `dist/Spintelligence-debug.apk` | `cd mobile && npm run android` (= `python tools/build_android.py`) | verified on an Android 15 emulator offline |
-| Android Play bundle | `dist/Spintelligence-release.aab` (+ signed `.apk`) | `npm run android:release` (= `build_android.py --release`) | built and signed; **not uploaded**, see Play section |
+| Android Play bundle | `dist/Spintelligence-release.aab` (+ signed `.apk`) | `npm run android:release` (= `build_android.py --release`) | version 1 live on the internal testing track (2026-11-11); see Open items |
 | Windows exe | `dist/Spintelligence.exe` | `python tools/build_desktop.py` (PyInstaller + pywebview/WebView2) | built |
 | Python engine + CLI | `beycounter/` | `python -m beycounter ...`, tests `python -m pytest` (9) | same model as the web app |
 | iOS | `mobile/` (Capacitor) | `npx cap add ios` on a Mac; no Mac available | iPhone uses the PWA |
@@ -104,9 +104,12 @@ with PyInstaller, pywebview, Pillow, pytest. `build_android.py` forces the JDK a
 
 ## Open items
 
-- Google Play: developer account, closed test, upload of `dist/Spintelligence-release.aab` (listing text and
-  form answers are ready in `store/play-listing.md`; privacy policy at
-  https://chromechris.github.io/beyblade-counter/privacy.html).
+- Google Play (personal developer account "wikiboiindsutries", so a closed test is required): app created
+  2026-11-11; store listing (text, Tools category, icon, feature graphic, 4 screenshots, contact email +
+  website) saved as draft; internal testing release 1 (1.0.0) published to one tester. Still to do: the
+  "App content" forms (answers in `store/play-listing.md`), trader status declaration (owner, due Feb 2027),
+  closed test with 12 testers for 14 days, then production. Next upload needs `versionCode` 2.
+- Play automatic protection (on by default) requires `minSdkVersion` 24, set in `mobile/android/variables.gradle`.
 - GitHub wiki: owner clicks "Create the first page", then `python tools/publish_wiki.py`.
 - Optional: GitHub Release with the APK and exe attached; a LICENSE file; the 7 missing photos; code
   signing for the Windows exe; native iOS build when a Mac is available.
