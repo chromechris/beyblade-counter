@@ -4,7 +4,7 @@ The Android app is a single file, `Spintelligence-debug.apk` (about 20 MB). It c
 
 ## Requirements
 
-- Android 6.0 (Marshmallow) or later. Tested on Android 15.
+- Android 7.0 (Nougat) or later. Tested on Android 15.
 - About 60 MB of free space after installation.
 - No Google account, no Play Store, no permissions beyond network access (which the app only uses for the wiki link in the footer).
 
